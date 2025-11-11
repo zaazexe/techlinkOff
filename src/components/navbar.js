@@ -4,6 +4,7 @@ import './../styles/Navbar.css';
 import { CartContext } from '../contexts/CartContext';
 import AddProductPanel from './AddProductPanel';
 
+
 function Navbar(props) {
   const { cart = [] } = useContext(CartContext) || {};
   const count = cart.length || 0;
@@ -33,13 +34,13 @@ function Navbar(props) {
   }, [location.search]);
 
   return (
-    <nav className="navbar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 12 }}>
+    <nav className="navbar" >
       <div className="navbar-brand">
-        <Link to="/" style={{ textDecoration: 'none', color: 'inherit', display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }} aria-label="Ir para a página inicial">
-          <h1 style={{ margin: 0 }}>TECHLINK</h1>
+        <Link to="/" aria-label="Ir para a página inicial">
+          <h1>TECHLINK</h1>
         </Link>
       </div>
-      <div className="navbar-search" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+      <div className="navbar-search">
         <input
           type="text"
           placeholder="Encontre aparelhos e periféricos usados..."
@@ -47,17 +48,17 @@ function Navbar(props) {
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); doSearch(search); } }}
           aria-label="Pesquisar produtos"
-          style={{ padding: '6px 8px', borderRadius: 6, border: '1px solid #ccc', minWidth: 240 }}
+          
         />
-        <button type="button" onClick={() => doSearch(search)} aria-label="Pesquisar" style={{ padding: '6px 10px', cursor: 'pointer' }}>
+        <button type="button" onClick={() => doSearch(search)} aria-label="Pesquisar" >
           🔍
         </button>
       </div>
-      <div className="navbar-actions" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+      <div className="navbar-actions" >
         <button
           type="button"
           onClick={() => setShowAddProduct(true)}
-          style={{ padding: '8px 12px', background: '#1976d2', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer' }}
+          
         >
           Adicionar produtos
         </button>
@@ -65,7 +66,7 @@ function Navbar(props) {
         <Link
           to="/cart"
           className="cart-icon"
-          style={{ textDecoration: 'none', position: 'relative', display: 'inline-block' }}
+         
           aria-label="Ver carrinho"
         >
           <span aria-hidden="true">🛒</span>
@@ -73,19 +74,7 @@ function Navbar(props) {
             <span
               className="cart-count"
               aria-live="polite"
-              style={{
-                position: 'absolute',
-                top: -6,
-                right: -6,
-                background: '#ff3b30',
-                color: '#fff',
-                borderRadius: '50%',
-                padding: '2px 6px',
-                fontSize: 12,
-                lineHeight: '12px',
-                minWidth: 20,
-                textAlign: 'center'
-              }}
+              
             >
               {count}
             </span>

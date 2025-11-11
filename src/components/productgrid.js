@@ -86,8 +86,8 @@ export default function ProductGrid(props) {
   };
 
   return (
-    <main className="product-grid" style={{ padding: 16 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+    <main className="product-grid">
+      <div >
         <div className="category-navigation">
           {categories.map(category => (
             <button
@@ -100,7 +100,7 @@ export default function ProductGrid(props) {
           ))}
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div >
 
 
           {/* Abre diretamente o pop-up; as opções estão dentro do AddProductPanel */}
@@ -108,16 +108,16 @@ export default function ProductGrid(props) {
         </div>
       </div>
 
-      <div className="products-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+      <div className="products-container" >
         {filteredProducts.map(product => (
           <div
             key={product.id}
             className="product-item"
-            style={{ cursor: 'pointer', border: '1px solid #ddd', padding: 12, borderRadius: 6 }}
+          
             onClick={() => handleCardClick(product.id)}
           >
             <ProductCard product={product} />
-            <div className="product-actions" style={{ marginTop: 8, display: 'flex', gap: 8 }}>
+            <div className="product-actions" >
               <button
                 onClick={e => {
                   e.stopPropagation();
