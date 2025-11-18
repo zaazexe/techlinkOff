@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useProducts } from '../contexts/ProductsContext';
+import './../styles/ProductDetail.css';
 
 export default function ProductDetail(/* props removed */) {
   const { id } = useParams();
@@ -61,11 +62,29 @@ export default function ProductDetail(/* props removed */) {
     ? product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
     : product?.price;
 
+  const handleBack = () => {
+    try {
+      if (window && window.history && window.history.length > 2) {
+        navigate(-1);
+        return;
+      }
+    } catch (e) {
+      // falha ao acessar history; fallback abaixo
+    }
+    navigate('/');
+  };
+
   if (!product && !qParam) return <div style={{ padding: 16 }}>Produto não encontrado.</div>;
 
   return (
     <div style={{ padding: 16, maxWidth: 920, margin: '0 auto' }}>
-      <button onClick={() => navigate(-1)} style={{ marginBottom: 12 }}>← Voltar</button>
+      <button
+        onClick={handleBack}
+        aria-label="Voltar"
+        className="back-button"
+      >
+        ← Voltar
+      </button>
 
       {/* Se houver query, mostra os resultados filtrados */}
       {qParam ? (

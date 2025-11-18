@@ -4,10 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 const ProductsContext = createContext(null);
 
 export function ProductsProvider({ children }) {
-  const [products, setProducts] = useState([
-    { id: 1, name: 'Placa Mãe Asus X', category: 'placa mae', price: 450.0, imageUrl: '' },
-    { id: 2, name: 'Memoria RAM 8GB', category: 'memoria RAM', price: 120.0, imageUrl: '' },
-  ]);
+  const [products, setProducts] = useState([]);
 
   function addProduct(product) {
     setProducts(prev => [product, ...prev]);

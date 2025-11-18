@@ -5,7 +5,7 @@ import Navbar from './components/navbar';
 import Sidebar from './components/sidebar';
 import ProductGrid from './components/productgrid';
 import ProductDetail from './components/productdetail';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { CartProvider } from './contexts/CartContext';
 import CartPage from './components/cartpage';
 import { ProductsProvider } from './contexts/ProductsContext';
@@ -29,34 +29,50 @@ function App(props) {
     <ProductsProvider>
       <CartProvider>
         <Router>
-          <div className="App">
-            <div className="header-cabecalho">
-              <Header />
-              <Navbar />
-            </div>
-            <div className="main-content">
-              <Sidebar
-                selectedCategory={filters.category}
-                selectedOption={filters.option}
-                onSelect={handleSelectFilter}
-                onClear={clearFilters}
-              />
-              <Routes>
-                <Route path="/" element={<ProductGrid filters={filters} />} />
-                <Route path="/product" element={<ProductDetail />} />
-                <Route path="/product/:id" element={<ProductDetail />} />
-                <Route path="/cart" element={<CartPage />} />
-              </Routes>
-            </div>
+          {
+            // Inner layout component uses hooks from react-router inside Router
+          }
+          <InnerLayout filters={filters} onSelect={handleSelectFilter} onClear={clearFilters} />
 
             {/* Botão para abrir o Gerenciador de Produtos (não altera CSS existente) */}
             <div style={{ display: 'inline-block' }}>
              
             </div>
-          </div>
+         
         </Router>
       </CartProvider>
     </ProductsProvider>
+  );
+}
+
+function InnerLayout({ filters, onSelect, onClear }) {
+  const location = useLocation();
+  const { pathname } = location || { pathname: '/' };
+  const showSidebar = pathname !== '/';
+
+  return (
+    <div className="App">
+      <div className="header-cabecalho">
+        <Header />
+        <Navbar />
+      </div>
+      <div className={`main-content ${!showSidebar ? 'no-sidebar' : ''}`}>
+        {showSidebar && (
+          <Sidebar
+            selectedCategory={filters.category}
+            selectedOption={filters.option}
+            onSelect={onSelect}
+            onClear={onClear}
+          />
+        )}
+        <Routes>
+          <Route path="/" element={<ProductGrid filters={filters} />} />
+          <Route path="/product" element={<ProductDetail />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<CartPage />} />
+        </Routes>
+      </div>
+    </div>
   );
 }
 

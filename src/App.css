@@ -13,6 +13,10 @@
  
 }
 
+.main-content.no-sidebar {
+  grid-template-columns: 1fr;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
