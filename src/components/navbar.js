@@ -2,16 +2,15 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './../styles/Navbar.css';
 import { CartContext } from '../contexts/CartContext';
-import AddProductPanel from './AddProductPanel';
+// AddProductPanel modal replaced by dedicated page; kept import removed
 
 
 function Navbar(props) {
   const { cart = [] } = useContext(CartContext) || {};
   const count = cart.length || 0;
-  const [showAddProduct, setShowAddProduct] = useState(false);
+  const navigate = useNavigate();
 
   const [search, setSearch] = useState('');
-  const navigate = useNavigate();
   const location = useLocation();
 
   const doSearch = (q) => {
@@ -57,8 +56,8 @@ function Navbar(props) {
       <div className="navbar-actions" >
         <button
           type="button"
-          onClick={() => setShowAddProduct(true)}
-          
+          onClick={() => navigate('/add-product')}
+          className="sell-device-button add-product-button"
         >
           Adicionar produtos
         </button>
@@ -82,14 +81,7 @@ function Navbar(props) {
         </Link>
       </div>
 
-      {/* modal do formulário */}
-      {showAddProduct && (
-        <AddProductPanel
-          onClose={() => setShowAddProduct(false)}
-          defaultCategory={props.defaultCategory}
-          addOptions={props.addOptions}
-        />
-      )}
+      {/* Previously used modal removed; AddProduct is now a dedicated page */}
     </nav>
   );
 }

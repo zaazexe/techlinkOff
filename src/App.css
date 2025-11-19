@@ -9,13 +9,12 @@
 
 .main-content {
   display: grid;
-  grid-template-columns: 0.1fr 1fr;
+  grid-template-columns: 280px 1fr;
+  gap: 18px;
  
 }
 
-.main-content.no-sidebar {
-  grid-template-columns: 1fr;
-}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -5,6 +5,9 @@ import Navbar from './components/navbar';
 import Sidebar from './components/sidebar';
 import ProductGrid from './components/productgrid';
 import ProductDetail from './components/productdetail';
+import CartPreview from './components/CartPreview';
+import Footer from './components/footer';
+import AddProductPage from './components/AddProductPage';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { CartProvider } from './contexts/CartContext';
 import CartPage from './components/cartpage';
@@ -57,21 +60,27 @@ function InnerLayout({ filters, onSelect, onClear }) {
         <Navbar />
       </div>
       <div className={`main-content ${!showSidebar ? 'no-sidebar' : ''}`}>
-        {showSidebar && (
-          <Sidebar
-            selectedCategory={filters.category}
-            selectedOption={filters.option}
-            onSelect={onSelect}
-            onClear={onClear}
-          />
+        {pathname === '/' ? (
+          <CartPreview />
+        ) : (
+          (showSidebar && pathname !== '/cart' && pathname !== '/add-product') && (
+            <Sidebar
+              selectedCategory={filters.category}
+              selectedOption={filters.option}
+              onSelect={onSelect}
+              onClear={onClear}
+            />
+          )
         )}
         <Routes>
           <Route path="/" element={<ProductGrid filters={filters} />} />
           <Route path="/product" element={<ProductDetail />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/add-product" element={<AddProductPage />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }

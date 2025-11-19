@@ -67,6 +67,18 @@ a {
   cursor: pointer;
 }
 
+.navbar-actions .sell-device-button:hover,
+.navbar-actions .add-product-button:hover {
+  background-color: #218838; /* slightly darker green */
+  transform: translateY(-1px);
+}
+
+.navbar-actions .sell-device-button:focus,
+.navbar-actions .add-product-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(40,167,69,0.12);
+}
+
 .navbar-actions .login-button {
   border: 1px solid #ddd;
 }
